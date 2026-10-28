@@ -103,7 +103,8 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
 [data-dash-source-state=refreshing]{opacity:.5;transition:opacity var(--cds-dur-slow);}
 .wx-fail{display:flex;align-items:center;justify-content:center;gap:6px;min-height:inherit;color:var(--color-fg-muted);font-size:var(--cds-font-size-caption);}
 .wx-fail i{width:.375rem;height:.375rem;border-radius:50%;background:var(--color-bad);display:inline-block;}
-.wx-adv{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:var(--cds-gap-md);}
+.wx-adv{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:var(--cds-gap-md);}
+@media (max-width:60rem){.wx-adv{grid-template-columns:minmax(0,1fr);}}
 .wx-adv-box{border:1px solid var(--color-border-line);border-left:4px solid var(--wx-blue);border-radius:var(--cds-radius);padding:var(--cds-pad-md);display:flex;flex-direction:column;gap:var(--cds-gap-xs);}
 .wx-adv-box.good{border-left-color:var(--color-ok);}
 .wx-adv-box.bad{border-left-color:var(--color-bad);}
