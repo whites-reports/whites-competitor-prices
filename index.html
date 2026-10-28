@@ -166,8 +166,6 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
     <p class="wx-meta">Prices are a snapshot taken on the websites on the date shown, not an average for the week. SAR, VAT included. Price paid = offer if there is one, else the regular price. Gap = Whites price paid vs the cheapest competitor.</p>
   </header>
 
-  <section class="wx-hl" id="highlights" data-source="comparison"><p id="hl-gap"><span class="txt">&#8212;</span></p></section>
-
   <div class="wx-adv-box wx-adv-sales wx-changes" id="changes-box" data-source="changes"><h3 id="changes-title">What changed since the previous check</h3><p class="wx-chg-sum" id="changes-sum">&#8212;</p><ul id="changes-list"><li>&#8212;</li></ul></div>
 
   <section class="wx-tiles" id="tiles">
@@ -394,16 +392,6 @@ dash.calc('summary', {
     add(' of ');
     add(String(s.products), true, {'data-source': 'summary', 'data-field': 'products', 'data-where': 'week_start=' + week});
     add(' products.');
-    const mk2 = (t, cls, mark) => { const b = document.createElement('b'); b.textContent = t; if (cls) b.className = cls; for (const [k, v] of Object.entries(mark || {})) b.setAttribute(k, v); return b; };
-    const gw = (r) => ({'data-source': 'comparison', 'data-field': 'gap', 'data-where': 'week_start=' + week + '&product=' + enc(r.product)});
-    const gapTxt = document.querySelector('#hl-gap .txt');
-    gapTxt.replaceChildren();
-    rows.filter((r) => r.gap > 0.0005).sort((x, y) => y.gap - x.gap).slice(0, 3).forEach((r) => {
-      const line = document.createElement('span'); line.className = 'ln';
-      line.append(mk2(r.product), document.createTextNode(' is '), mk2(pct(r.gap), 'r', gw(r)), document.createTextNode(' above ' + r.cheapest + '.'));
-      gapTxt.append(line);
-    });
-    if (!gapTxt.children.length) gapTxt.textContent = 'Whites is not more expensive on any product this check.';
   }
 
   function drawChart(comp, week) {
