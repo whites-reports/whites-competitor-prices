@@ -1,5 +1,6 @@
 <!doctype html>
-<html lang="en"><head><meta charset="utf-8"><meta name="robots" content="noindex, nofollow"><meta name="viewport" content="width=device-width,initial-scale=1">
+<html lang="en"><head>
+<meta name="robots" content="noindex, nofollow"><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Whites Competitor Prices</title>
 <style>
 :root{--font-sans:system-ui,-apple-system,"Segoe UI",Roboto,Arial,sans-serif;
@@ -105,6 +106,8 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
 .wx-adv-box{border:1px solid var(--color-border-line);border-left:4px solid var(--wx-blue);border-radius:var(--cds-radius);padding:var(--cds-pad-md);display:flex;flex-direction:column;gap:var(--cds-gap-xs);}
 .wx-adv-box.good{border-left-color:var(--color-ok);}
 .wx-adv-box.bad{border-left-color:var(--color-bad);}
+.wx-adv-big{grid-column:1/-1;}
+.wx-adv-big ul{font-size:var(--cds-font-size-body);}
 .wx-adv-box.warn{border-left-color:var(--wx-yellow);}
 .wx-adv-box h3{margin:0;font-size:var(--cds-font-size-body);font-weight:600;}
 .wx-adv-box p{margin:0;font-size:var(--cds-font-size-caption);color:var(--color-fg-muted);}
@@ -186,8 +189,9 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
       <div class="wx-adv-box good"><h3>Push in ads: Whites is cheapest</h3><p>Lead paid and social ads with these, using the price advantage in the message.</p><ul id="adv-push"><li>&#8212;</li></ul></div>
       <div class="wx-adv-box"><h3>Only priced at Whites</h3><p>No competitor price found. Where it is truly exclusive, promote it as "only at Whites"; otherwise check it next week.</p><ul id="adv-only"><li>&#8212;</li></ul></div>
       <div class="wx-adv-box warn"><h3>Close a small gap</h3><p>Whites is up to 15% above the cheapest competitor. A light promo, coupon or bundle would close it.</p><ul id="adv-small" class="wx-chips"><li>&#8212;</li></ul></div>
+      <div class="wx-adv-box bad wx-adv-big"><h3>Match price or run an offer: more than 15% above a competitor</h3><p>Shown in red in the table and chart. Fix the price before spending on ads, as price-comparing customers will buy elsewhere.</p><ul id="adv-big"><li>&#8212;</li></ul></div>
     </div>
-    <p class="wx-adv-line">Products more than 15% above a competitor (red in the table and chart): match the price or run an offer before spending on ads, as price-comparing customers will buy elsewhere.</p>
+
     
   </section>
   <section class="wx-card" id="price-table-card">
@@ -532,6 +536,20 @@ dash.calc('summary', {
       sm.append(more);
     }
     fill('adv-only', rows.filter((r) => r.gap === null && r.whites_final !== null), () => {});
+    fill('adv-big', withGap.filter((r) => r.gap > 0.15).sort((a, b) => b.gap - a.gap), (li, r) => {
+      li.append(document.createTextNode(': '), gapEl(r, 'r'), document.createTextNode(' vs ' + r.cheapest));
+    });
+    const bigUl = document.getElementById('adv-big');
+    const bigBox = bigUl.parentElement;
+    bigBox.querySelectorAll(':scope > .wx-more').forEach((b) => b.remove());
+    const bigItems = [...bigUl.children];
+    if (bigItems.length > 5) {
+      const b = document.createElement('button'); b.className = 'wx-more';
+      let openBig = !!window.__wxBigOpen;
+      const apply = () => { bigItems.slice(5).forEach((li) => { li.hidden = !openBig; }); b.textContent = openBig ? '\u2212 See less' : '+ See ' + (bigItems.length - 5) + ' more'; };
+      b.addEventListener('click', () => { openBig = !openBig; window.__wxBigOpen = openBig; apply(); });
+      apply(); bigUl.after(b);
+    }
   }
 
   function drawChanges(prices, week) {
