@@ -56,6 +56,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
 .wx-table tbody tr.wx-win td.prod{color:inherit;}
 .wx-table tbody tr.wx-win td:first-child{box-shadow:inset 4px 0 0 #FFDD65;}
 .wx-meta{margin:0;font-size:var(--cds-font-size-caption);color:#B9C7D9;}
+.wx-outof{font-size:.55em;font-weight:500;color:var(--color-fg-muted);}
 .wx-tiles{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,11rem),1fr));gap:var(--cds-gap-md);}
 .wx-tile{background:var(--color-panel);border:1px solid var(--color-border-line);border-top:4px solid var(--wx-blue);border-radius:var(--cds-radius);padding:var(--cds-pad-md) var(--cds-pad-lg);display:flex;flex-direction:column;gap:var(--cds-gap-xs);}
 .wx-tile.bad{border-top-color:var(--color-bad);}
@@ -156,9 +157,8 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
   <div class="wx-adv-box wx-adv-sales wx-changes" id="changes-box" data-source="changes"><h3 id="changes-title">What changed since the previous check</h3><p class="wx-chg-sum" id="changes-sum">&#8212;</p><ul id="changes-list"><li>&#8212;</li></ul></div>
 
   <section class="wx-tiles" id="tiles">
-    <div class="wx-tile"><span class="wx-tile-label">Products compared</span><span class="wx-tile-value dash-skeleton" id="t-products" data-source="summary" data-field="products">&#8212;</span><span class="wx-tile-note">With at least one competitor price</span></div>
-    <div class="wx-tile good"><span class="wx-tile-label">Whites cheapest or equal</span><span class="wx-tile-value dash-skeleton" id="t-good" data-source="summary" data-field="cheaper_or_equal">&#8212;</span><span class="wx-tile-note">Gap of 0% or less</span></div>
     <div class="wx-tile bad"><span class="wx-tile-label">Whites more expensive</span><span class="wx-tile-value dash-skeleton" id="t-bad" data-source="summary" data-field="more_expensive">&#8212;</span><span class="wx-tile-note">A competitor sells it for less</span></div>
+    <div class="wx-tile good"><span class="wx-tile-label">Whites cheapest or equal</span><span class="wx-tile-value dash-skeleton" id="t-good" data-source="summary" data-field="cheaper_or_equal">&#8212;</span><span class="wx-tile-note">No competitor sells it for less</span></div>
   </section>
 
 
@@ -169,7 +169,7 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
   </section>
 
   <section class="wx-card" id="todo-card">
-    <h2>This week's to-do list</h2>
+    <h2>What needs to be done</h2>
     <p class="wx-note" id="todo-note" data-source="sales">&#8212;</p>
     <div class="wx-todo" id="todo" data-source="todo"></div>
   </section>
@@ -346,9 +346,20 @@ dash.calc('summary', {
       el.classList.remove('dash-skeleton');
       el.textContent = row ? txt(row[field]) : '—';
     };
-    set('t-products', 'products', String);
-    set('t-good', 'cheaper_or_equal', String);
-    set('t-bad', 'more_expensive', String);
+    const outOf = (v) => {
+      const f = document.createDocumentFragment();
+      f.append(document.createTextNode(String(v)));
+      const o = document.createElement('span'); o.className = 'wx-outof'; o.textContent = ' / ' + (row ? row.products : '');
+      f.append(o); return f;
+    };
+    const setOut = (id, field) => {
+      const el = document.getElementById(id);
+      el.setAttribute('data-where', 'week_start=' + week);
+      el.classList.remove('dash-skeleton');
+      el.replaceChildren(row ? outOf(row[field]) : '—');
+    };
+    setOut('t-bad', 'more_expensive');
+    setOut('t-good', 'cheaper_or_equal');
   }
 
   function drawTake(comp, sum, week) {
