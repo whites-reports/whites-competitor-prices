@@ -132,6 +132,9 @@ html,body{margin:0;background:var(--color-bg);color:var(--color-fg)}
 .wx-chg-key{margin:var(--cds-gap-sm) 0 var(--cds-gap-xs);padding:var(--cds-pad-sm) var(--cds-pad-md) var(--cds-pad-sm) calc(var(--cds-pad-md) + 1.1rem);background:color-mix(in srgb,var(--wx-blue) 10%,var(--color-panel));border-radius:var(--cds-radius);font-size:var(--cds-font-size-body);line-height:1.55;}
 .wx-chg-key li{margin:2px 0;}
 .wx-chg-key b{font-weight:600;}
+.wx-chg-key li.flag.bad::marker{color:var(--color-bad);}
+.wx-chg-key li.flag.bad b{color:var(--color-bad);}
+.wx-chg-key li.flag.good b{color:var(--color-ok);}
 .wx-chg-sum{margin:0;font-size:var(--cds-font-size-body);color:var(--color-fg);}
 .wx-adv-sales li .arr{color:var(--color-fg-muted);}
 .wx-changes{background:var(--color-panel);}
@@ -572,6 +575,29 @@ dash.calc('summary', {
     const add = (parts) => { const li = document.createElement('li'); parts.forEach((p) => li.append(typeof p === 'string' ? document.createTextNode(p) : p)); key.append(li); };
     const bold = (t) => { const b = document.createElement('b'); b.textContent = t; return b; };
     const rowOf0 = (d, p) => prices.find((r) => r.week_start === d && r.product === p) || {};
+    const SLd = dash.data('sales');
+    const wk = (p) => { if (SLd.status !== 'ok') return 0; const r = SLd.data.find((x) => x.product === p); return r ? +r.weekly_revenue || 0 : 0; };
+    const sar = (v) => 'SAR ' + d3.format(',.0f')(v);
+    const isOos = (d, p) => /Whites out of stock/i.test(rowOf0(d, p).notes || '');
+    const prods = [...new Set(prices.filter((r) => r.week_start === week).map((r) => r.product))];
+    const wentOos = prods.filter((p) => isOos(week, p) && !isOos(prevDate, p)).sort((a, b) => wk(b) - wk(a));
+    const backIn = prods.filter((p) => !isOos(week, p) && isOos(prevDate, p)).sort((a, b) => wk(b) - wk(a));
+    const whitesMoved = rows.some((r) => r.retailer === 'Whites');
+    const alert = (parts, cls) => { const li = document.createElement('li'); li.className = cls; parts.forEach((p) => li.append(typeof p === 'string' ? document.createTextNode(p) : p)); key.append(li); };
+    if (wentOos.length) {
+      const tot = d3.sum(wentOos, wk);
+      alert([(whitesMoved ? '' : "Whites didn't change any prices, but "), bold(list(wentOos) + ' went out of stock on the Whites site.'),
+             tot ? ' ' + (wentOos.length > 1 ? 'Together they sell' : 'It sells') + ' about ' + sar(tot) + ' a week, which is lost until restocked.' : ' Customers cannot buy it there until it is restocked.'], 'flag bad');
+    }
+    if (backIn.length) alert([bold('Back in stock on Whites: ' + list(backIn) + '.')], 'flag good');
+    const cmp = dash.data('comparison');
+    if (cmp.status === 'ok') {
+      const g = (d, p) => { const r = cmp.data.find((x) => x.week_start === d && x.product === p); return r ? r.gap : null; };
+      const crossed = prods.filter((p) => g(week, p) != null && g(week, p) > 0.15 && (g(prevDate, p) == null || g(prevDate, p) <= 0.15) && wk(p) >= 2000).sort((a, b) => wk(b) - wk(a));
+      if (crossed.length) alert([bold(list(crossed) + (crossed.length > 1 ? ' are' : ' is') + ' now more than 15% above a competitor'), ' (about ' + sar(d3.sum(crossed, wk)) + ' a week in sales). Match the price or run an offer.'], 'flag bad');
+      const fixed = prods.filter((p) => g(week, p) != null && g(week, p) <= 0.15 && g(prevDate, p) != null && g(prevDate, p) > 0.15 && wk(p) >= 2000).sort((a, b) => wk(b) - wk(a));
+      if (fixed.length) alert([bold(list(fixed) + (fixed.length > 1 ? ' are' : ' is') + ' back within 15% of the cheapest competitor.')], 'flag good');
+    }
     const S = dash.data('summary');
     if (S.status === 'ok') {
       const a = S.data.find((r) => r.week_start === week), b = S.data.find((r) => r.week_start === prevDate);
