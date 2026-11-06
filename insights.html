@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="robots" content="noindex, nofollow">
+<title>Whites Growth Insights</title>
+<link rel="preconnect" href="https://fonts.googleapis.com"><link href="https://fonts.googleapis.com/css2?family=Inter+Tight:wght@400;500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdnjs.cloudflare.com/ajax/libs/d3/7.9.0/d3.min.js"></script>
+<style>
+:root{--navy:#0F2D52;--blue:#41A4FF;--yellow:#FFDD65;--bg:#F5F7FA;--panel:#fff;--fg:#14202E;--muted:#5B6878;--line:#E3E8EF;--bad:#D64545;--ok:#1F8A4C;--grey:#B8C2CE}
+*{box-sizing:border-box}body{margin:0;background:var(--bg);color:var(--fg);font-family:"Inter Tight",system-ui,sans-serif;font-variant-numeric:tabular-nums}
+.wrap{max-width:1180px;margin:0 auto;padding:24px 16px 48px;display:flex;flex-direction:column;gap:20px}
+.head{background:var(--navy);color:#fff;border-radius:14px;padding:26px 28px;display:flex;flex-direction:column;gap:10px}
+.head h1{margin:0;font-size:28px;letter-spacing:-.01em}.head h1 span{color:var(--yellow)}
+.head p{margin:0;color:#DCE6F2;line-height:1.5;max-width:60rem}.head small{color:#A9B9CC}
+.sum{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,200px),1fr));gap:12px}
+.sum a{display:block;text-decoration:none;color:inherit;background:var(--panel);border:1px solid var(--line);border-top:4px solid var(--blue);border-radius:12px;padding:14px 16px}
+.sum a.bad{border-top-color:var(--bad)}.sum a.ok{border-top-color:var(--ok)}
+.sum .n{font-size:26px;font-weight:700;line-height:1.1}.sum .l{font-size:13px;color:var(--muted);margin-top:4px;line-height:1.4}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:14px;padding:24px;display:flex;flex-direction:column;gap:14px}
+.tag{font-size:12px;font-weight:700;letter-spacing:.06em;text-transform:uppercase;color:var(--blue)}
+.card h2{margin:0;font-size:22px;line-height:1.25;color:var(--navy)}
+.lead{margin:0;line-height:1.55;color:var(--fg);max-width:62rem}
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,420px),1fr));gap:20px}
+.ch{min-width:0}.ch h3{margin:0 0 6px;font-size:14px;font-weight:600}.ch .note{font-size:12px;color:var(--muted);margin:4px 0 0}
+.do{background:#EEF6FF;border-radius:10px;padding:14px 18px}.do b{display:block;margin-bottom:6px;color:var(--navy)}
+.do ul{margin:0;padding-left:18px;line-height:1.6}
+svg{display:block;width:100%;height:auto;overflow:visible}svg text{font-family:inherit;font-size:12px;fill:var(--muted)}
+.tip{position:fixed;pointer-events:none;background:#fff;border:1px solid var(--line);border-radius:8px;box-shadow:0 6px 18px rgba(15,45,82,.15);padding:6px 10px;font-size:12px;display:none;z-index:9}
+table{border-collapse:collapse;width:100%;font-size:13px}th{text-align:left;color:var(--muted);font-weight:600;padding:6px 8px;border-bottom:1px solid var(--line)}td{padding:6px 8px;border-bottom:1px solid var(--line)}td.r,th.r{text-align:right}.up{color:var(--ok);font-weight:600}.dn{color:var(--bad);font-weight:600}
+.key{display:flex;gap:14px;font-size:12px;color:var(--muted);flex-wrap:wrap}.sw{display:inline-block;width:10px;height:10px;border-radius:2px;margin-right:5px;vertical-align:-1px}
+.foot{font-size:12px;color:var(--muted);line-height:1.5}
+</style></head><body><div class="wrap">
+<header class="head"><h1>Whites <span>growth</span> insights</h1>
+<p>Five things hiding in Whites' own order data and in the daily competitor price checks. Each comes with the money involved and what to do about it.</p>
+<small>Orders: 1 Nov 2025 – 26 Oct 2026 (Whites backend export, all online orders). Competitor prices: daily checks 28 Oct – 6 Nov 2026. SAR, VAT included.</small></header>
+<section class="sum" id="sum"></section>
+
+<section class="card" id="f1"><div class="tag">1 · Cash on delivery</div>
+<h2 id="f1h"></h2><p class="lead" id="f1p"></p>
+<div class="grid"><div class="ch"><h3>Orders cancelled or refunded, by order value</h3><div class="key"><span><i class="sw" style="background:var(--bad)"></i>Cash on delivery</span><span><i class="sw" style="background:var(--grey)"></i>Paid online</span></div><div id="c1a"></div></div>
+<div class="ch"><h3>Share of orders paid cash on delivery, by month</h3><div id="c1b"></div><p class="note">October runs to 26 Oct.</p></div></div>
+<div class="do"><b>What Acquisit advises</b><ul>
+<li>Give a reason to pay online: free shipping or an extra 5% for card, Apple Pay, Tabby or Tamara payments.</li>
+<li>Confirm cash orders by WhatsApp before they ship, starting with orders above 400 SAR.</li>
+<li>For orders above 800 SAR (mostly hair tools and perfume), ask for online payment or a small deposit.</li></ul></div></section>
+
+<section class="card" id="f2"><div class="tag">2 · Payday calendar</div>
+<h2 id="f2h"></h2><p class="lead" id="f2p"></p>
+<div class="grid"><div class="ch"><h3>Average sales by day of the month (100 = a normal day)</h3><div id="c2a"></div></div>
+<div class="ch"><h3>Average sales by day of the week</h3><div id="c2b"></div></div></div>
+<div class="do"><b>What Acquisit advises</b><ul>
+<li>Launch the biggest campaigns and new offers on the 26th–27th, so they are live when salaries land.</li>
+<li>Use the quiet 16th–24th window for targeted flash deals and reminders instead of broad discounts.</li>
+<li>Weight ad budget towards Friday and Saturday.</li></ul></div></section>
+
+<section class="card" id="f3"><div class="tag">3 · Baskets and bundles</div>
+<h2 id="f3h"></h2><p class="lead" id="f3p"></p>
+<div class="grid"><div class="ch"><h3>Brands most often bought together (orders)</h3><div id="c3a"></div></div>
+<div class="ch"><h3>What the few Dyson and Clara buyers who add something pick (orders)</h3><div id="c3b"></div></div></div>
+<div class="do"><b>What Acquisit advises</b><ul>
+<li>Offer a ready-made "complete the look" add-on at checkout for every Dyson and Clara order: a heat protectant, a hair mask (K18, Kérastase) or a makeup set.</li>
+<li>Turn the strongest pairs into bundles, for example Priorin + Cystine as a hair-vitamin pack, and Beauty of Joseon + La Roche-Posay as a sun-and-repair set.</li></ul></div></section>
+
+<section class="card" id="f4"><div class="tag">4 · Life after hair tools</div>
+<h2 id="f4h"></h2><p class="lead" id="f4p"></p>
+<div class="grid"><div class="ch"><h3>Dyson and Clara share of Whites' sales, by month</h3><div id="c4a"></div><p class="note">October runs to 26 Oct.</p></div>
+<div class="ch"><h3>Brands moving fastest (sales per 30 days, Aug–Oct vs May–Jul)</h3><div id="t4"></div></div></div>
+<div class="do"><b>What Acquisit advises</b><ul>
+<li>Put ad budget behind the brands already growing on their own: L'Oréal Professionnel, ISDIN, Kérastase, Medicube and QV.</li>
+<li>Investigate the fall in La Roche-Posay, Whites' biggest beauty brand. It is also where competitors are cheaper (see the price dashboard).</li></ul></div></section>
+
+<section class="card" id="f5"><div class="tag">5 · How competitors price</div>
+<h2 id="f5h"></h2><p class="lead" id="f5p"></p>
+<div class="grid"><div class="ch"><h3>Price changes across 48 products, 28 Oct – 6 Nov</h3><div id="c5a"></div></div>
+<div class="ch"><h3>How often each retailer was the cheapest (or level)</h3><div id="c5b"></div><p class="note">Share of the products each retailer sells, checked daily.</p></div></div>
+<div class="do"><b>What Acquisit advises</b><ul>
+<li>Pick the 15–20 products customers compare most and hold a stable "everyday price" within 5% of Nahdi, instead of switching offers on and off.</li>
+<li>Avoid ending many offers on the same day, as on 1 Nov, when Whites went from cheapest on 13 products to 5 overnight.</li></ul></div></section>
+
+<p class="foot">Cancelled or refunded = orders with status Cancelled or Refund Operation. "Normal day" = average daily sales over the period. Brand trends exclude hair tools and prescription medicines.</p>
+</div><div class="tip" id="tip"></div>
+<script>
+const D={"cod": {"cod_fail": 0.2703983604457538, "pre_fail": 0.03699180964176996, "cod_lost": 2557772.96, "pre_lost": 1294631.0899999999, "cod_orders": 34812, "period": "1 Nov 2025 \u2013 26 Oct 2026", "share": [{"m": "2025-11", "v": 0.1931241780950592}, {"m": "2025-12", "v": 0.16307692307692306}, {"m": "2026-01", "v": 0.15031201248049922}, {"m": "2026-02", "v": 0.1534052596089009}, {"m": "2026-03", "v": 0.21306300837683623}, {"m": "2026-04", "v": 0.19027802372941385}, {"m": "2026-05", "v": 0.15103893836214424}, {"m": "2026-06", "v": 0.15060464426144374}, {"m": "2026-07", "v": 0.2063421501074313}, {"m": "2026-08", "v": 0.34391829155060355}, {"m": "2026-09", "v": 0.342591079888907}, {"m": "2026-10", "v": 0.3292604501607717}], "band": [{"b": "(0.0, 100.0]", "cod": 0.2636115753364412, "pre": 0.062416014086464945}, {"b": "(100.0, 200.0]", "cod": 0.2492952567716632, "pre": 0.03516556048549741}, {"b": "(200.0, 400.0]", "cod": 0.2629462041226747, "pre": 0.027023145599463845}, {"b": "(400.0, 800.0]", "cod": 0.3142408787759906, "pre": 0.03271057041772702}, {"b": "(800.0, 1000000000.0]", "cod": 0.43210930828351835, "pre": 0.03379670960336692}], "pickup_fail": 0.18107279213869937, "delivery_fail": 0.07538222297494958}, "dom": [{"d": 1, "v": 1.3017106536354257}, {"d": 2, "v": 1.1420761808735262}, {"d": 3, "v": 1.255848350538018}, {"d": 4, "v": 1.0417669878643847}, {"d": 5, "v": 1.0950180027760754}, {"d": 6, "v": 1.0990390989363696}, {"d": 7, "v": 1.1288104741539486}, {"d": 8, "v": 1.0190114260999121}, {"d": 9, "v": 1.001715725323234}, {"d": 10, "v": 1.070200403874917}, {"d": 11, "v": 1.0234177563558957}, {"d": 12, "v": 0.9595305990647458}, {"d": 13, "v": 1.0014358767470442}, {"d": 14, "v": 0.9579368463318197}, {"d": 15, "v": 0.9253369347866749}, {"d": 16, "v": 0.8718126537919718}, {"d": 17, "v": 0.9070898251519344}, {"d": 18, "v": 0.8171864737436643}, {"d": 19, "v": 0.7677416548679097}, {"d": 20, "v": 0.7515881871693753}, {"d": 21, "v": 0.7774297170503641}, {"d": 22, "v": 0.8553739890882027}, {"d": 23, "v": 0.8559405913568882}, {"d": 24, "v": 0.8690828560887727}, {"d": 25, "v": 0.9625935640295543}, {"d": 26, "v": 0.9204092357419592}, {"d": 27, "v": 1.223639813968333}, {"d": 28, "v": 1.2214486828056916}, {"d": 29, "v": 1.0873471609616718}, {"d": 30, "v": 1.0653895918028844}, {"d": 31, "v": 1.0230706850188258}], "dow": [{"d": "Sun", "v": 0.9983499053155285}, {"d": "Mon", "v": 0.9043403592883353}, {"d": "Tue", "v": 0.9032697712338531}, {"d": "Wed", "v": 0.9202541760484826}, {"d": "Thu", "v": 1.018562895877636}, {"d": "Fri", "v": 1.1177030325359587}, {"d": "Sat", "v": 1.1375198597002047}], "avg_day": 122851.1574928775, "ht": {"orders": 14518, "alone": 0.7584378013500482, "with": [{"b": "Loca", "n": 340}, {"b": "Maybelline", "n": 331}, {"b": "Flormar", "n": 218}, {"b": "Essence", "n": 205}, {"b": "La Roche-Posay", "n": 185}, {"b": "Beauty Of Joseon", "n": 151}, {"b": "Wet N Wild", "n": 139}, {"b": "Eucerin", "n": 112}]}, "pairs": [{"a": "Beauty Of Joseon", "b": "La Roche-Posay", "n": 976}, {"a": "Cerave", "b": "La Roche-Posay", "n": 861}, {"a": "Loca", "b": "Maybelline", "n": 820}, {"a": "Bioderma", "b": "La Roche-Posay", "n": 819}, {"a": "Beauty Of Joseon", "b": "Dr.Althea", "n": 810}, {"a": "Flormar", "b": "Maybelline", "n": 768}, {"a": "La Roche-Posay", "b": "Vichy", "n": 746}, {"a": "Essence", "b": "Maybelline", "n": 720}, {"a": "Eucerin", "b": "La Roche-Posay", "n": 692}, {"a": "La Roche-Posay", "b": "The Ordinary", "n": 670}], "dep": [{"m": "2025-11", "v": 0.306241430926327}, {"m": "2025-12", "v": 0.2650828159955836}, {"m": "2026-01", "v": 0.2684985697617332}, {"m": "2026-02", "v": 0.24696654136273516}, {"m": "2026-03", "v": 0.2926736519122257}, {"m": "2026-04", "v": 0.10266779032166645}, {"m": "2026-05", "v": 0.17258665190651193}, {"m": "2026-06", "v": 0.04112056620710523}, {"m": "2026-07", "v": 0.10313650632102066}, {"m": "2026-08", "v": 0.0935958839244202}, {"m": "2026-09", "v": 0.18472713786087114}, {"m": "2026-10", "v": 0.13228462280635303}], "up": [{"b": "L'Or\u00e9al Professionnel", "before": 15537.524999999998, "after": 40167.106896551726, "pct": 1.585167643917016}, {"b": "Isdin", "before": 19580.983695652172, "after": 40170.65862068965, "pct": 1.0515138179502843}, {"b": "Loca", "before": 20055.254347826085, "after": 33796.527586206896, "pct": 0.685170728830488}, {"b": "Kerastase", "before": 31899.391304347824, "after": 49448.81034482758, "pct": 0.5501490255109602}, {"b": "Medicube", "before": 38221.07608695652, "after": 56446.472413793104, "pct": 0.4768415280975371}, {"b": "QV", "before": 39581.77173913044, "after": 54467.87931034483, "pct": 0.3760849228610459}, {"b": "Huda Beauty", "before": 35989.6402173913, "after": 45721.13448275862, "pct": 0.2703970977921797}, {"b": "The Ordinary", "before": 35635.44782608695, "after": 44462.08275862069, "pct": 0.24769254972213917}], "down": [{"b": "Yves Saint Laurent", "before": 36624.65543478261, "after": 14743.482758620688, "pct": -0.5974437825121834}, {"b": "Oral B", "before": 34998.90652173913, "after": 14790.437931034481, "pct": -0.5774028562335916}, {"b": "Narciso Rodriguez", "before": 38318.04782608696, "after": 22292.137931034482, "pct": -0.41823398644390286}, {"b": "La Roche-Posay", "before": 202731.19239130436, "after": 118565.07586206896, "pct": -0.41516115767119366}, {"b": "Skin1004", "before": 50670.06521739131, "after": 31970.158620689657, "pct": -0.36905234908368245}, {"b": "Priorin", "before": 74480.08369565217, "after": 47466.54137931035, "pct": -0.3626948437212719}], "price_changes": {"Whites": 63, "Niceone": 32, "Al Dawaa": 6, "Nahdi": 4, "Sephora": 0}, "cheapest_rate": {"Nahdi": 0.53, "Al Dawaa": 0.4, "Whites": 0.27, "Niceone": 0.23, "Sephora": 0.03}, "coupon": {"share": 0.3849556513390539, "monthly": [{"m": "2025-11", "v": 0.4704894657205336}, {"m": "2025-12", "v": 0.47724794720528013}, {"m": "2026-01", "v": 0.45912970805732073}, {"m": "2026-02", "v": 0.450175229971411}, {"m": "2026-03", "v": 0.3378748149425999}, {"m": "2026-04", "v": 0.33350169166348737}, {"m": "2026-05", "v": 0.44557473930510544}, {"m": "2026-06", "v": 0.37563877490560343}, {"m": "2026-07", "v": 0.38073696899050213}, {"m": "2026-08", "v": 0.3205159885188251}, {"m": "2026-09", "v": 0.3266657514483068}, {"m": "2026-10", "v": 0.2710483931815741}]}};
+const f0=d3.format(',.0f'),p0=d3.format('.0%'),sar=v=>'SAR '+(v>=1e6?d3.format('.2f')(v/1e6)+'M':v>=1e3?d3.format('.0f')(v/1e3)+'k':f0(v));
+const mn=m=>d3.timeFormat('%b')(d3.timeParse('%Y-%m')(m));
+const tip=document.getElementById('tip');
+function showTip(e,h){tip.innerHTML=h;tip.style.display='block';tip.style.left=Math.min(e.clientX+12,innerWidth-200)+'px';tip.style.top=(e.clientY+12)+'px'}
+function hideTip(){tip.style.display='none'}
+function el(id){return document.getElementById(id)}
+function hbars(id,data,{label,val,fmt,color='var(--navy)'}){const W=520,rh=26,H=data.length*rh+10,ml=190;const s=d3.select('#'+id).append('svg').attr('viewBox',`0 0 ${W} ${H}`);const x=d3.scaleLinear().domain([0,d3.max(data,val)]).range([0,W-ml-60]);
+const g=s.selectAll('g').data(data).join('g').attr('transform',(d,i)=>`translate(0,${i*rh+4})`);g.append('text').attr('x',ml-8).attr('y',rh/2).attr('text-anchor','end').attr('dominant-baseline','middle').style('fill','var(--fg)').text(label);
+g.append('rect').attr('x',ml).attr('y',4).attr('height',rh-10).attr('rx',3).attr('width',d=>x(val(d))).attr('fill',typeof color==='function'?color:()=>color);g.append('text').attr('x',d=>ml+x(val(d))+6).attr('y',rh/2).attr('dominant-baseline','middle').style('fill','var(--fg)').style('font-weight',600).text(d=>fmt(val(d)))}
+function vbars(id,data,{x:xf,y:yf,fmt,color,base,H=220,lab}){const W=560,mb=24,mt=14,ml=36;const s=d3.select('#'+id).append('svg').attr('viewBox',`0 0 ${W} ${H}`);const x=d3.scaleBand().domain(data.map(xf)).range([ml,W]).padding(.18);const y=d3.scaleLinear().domain([0,d3.max(data,yf)*1.1]).nice().range([H-mb,mt]);
+s.append('g').attr('transform',`translate(${ml},0)`).call(d3.axisLeft(y).ticks(4).tickFormat(fmt).tickSize(-(W-ml))).call(g=>{g.select('.domain').remove();g.selectAll('line').attr('stroke','var(--line)')});
+if(base!=null)s.append('line').attr('x1',ml).attr('x2',W).attr('y1',y(base)).attr('y2',y(base)).attr('stroke','var(--navy)').attr('stroke-dasharray','4 3');
+s.selectAll('rect.b').data(data).join('rect').attr('x',d=>x(xf(d))).attr('width',x.bandwidth()).attr('y',d=>y(yf(d))).attr('height',d=>y(0)-y(yf(d))).attr('rx',2).attr('fill',color).on('mousemove',(e,d)=>showTip(e,lab(d))).on('mouseleave',hideTip);
+s.append('g').attr('transform',`translate(0,${H-mb})`).call(d3.axisBottom(x).tickValues(data.length>12?x.domain().filter((d,i)=>i%3===0):x.domain()).tickSize(0)).call(g=>g.select('.domain').remove())}
+function line(id,data,{fmt}){const W=560,H=220,mb=24,mt=14,ml=40;const s=d3.select('#'+id).append('svg').attr('viewBox',`0 0 ${W} ${H}`);const x=d3.scalePoint().domain(data.map(d=>d.m)).range([ml+8,W-12]);const y=d3.scaleLinear().domain([0,d3.max(data,d=>d.v)*1.15]).nice().range([H-mb,mt]);
+s.append('g').attr('transform',`translate(${ml},0)`).call(d3.axisLeft(y).ticks(4).tickFormat(fmt).tickSize(-(W-ml))).call(g=>{g.select('.domain').remove();g.selectAll('line').attr('stroke','var(--line)')});
+s.append('path').datum(data).attr('fill','none').attr('stroke','var(--blue)').attr('stroke-width',2.5).attr('d',d3.line().x(d=>x(d.m)).y(d=>y(d.v)));
+s.selectAll('circle').data(data).join('circle').attr('cx',d=>x(d.m)).attr('cy',d=>y(d.v)).attr('r',4).attr('fill','var(--blue)').on('mousemove',(e,d)=>showTip(e,`${mn(d.m)} ${d.m.slice(0,4)}: <b>${fmt(d.v)}</b>`)).on('mouseleave',hideTip);
+s.append('g').attr('transform',`translate(0,${H-mb})`).call(d3.axisBottom(x).tickFormat(mn).tickSize(0)).call(g=>g.select('.domain').remove())}
+// numbers
+const C=D.cod, codShareNow=d3.mean(C.share.slice(-3),d=>d.v), codShareBefore=d3.mean(C.share.slice(0,7),d=>d.v);
+const dom=D.dom, pay=d3.mean(dom.filter(d=>d.d>=27||d.d<=3),d=>d.v), low=d3.mean(dom.filter(d=>d.d>=16&&d.d<=24),d=>d.v);
+const dep0=D.dep[0].v, depN=D.dep[D.dep.length-1].v;
+const sum=[['bad',sar(C.cod_lost),'of cash-on-delivery orders cancelled or refunded in 12 months','#f1'],
+['',p0(pay/low-1)+' more','sales per day around payday (27th–3rd) than mid-month (16th–24th)','#f2'],
+['',p0(D.ht.alone),'of Dyson and Clara orders contain nothing else','#f3'],
+['ok',p0(dep0)+' → '+p0(depN),'Dyson and Clara share of sales, Nov 2025 to Oct 2026','#f4'],
+['',D.price_changes.Whites+' vs '+D.price_changes.Nahdi,'price changes by Whites vs Nahdi in 10 days','#f5']];
+d3.select('#sum').selectAll('a').data(sum).join('a').attr('class',d=>d[0]).attr('href',d=>d[3]).html(d=>`<div class="n">${d[1]}</div><div class="l">${d[2]}</div>`);
+el('f1h').textContent=`1 in 4 cash-on-delivery orders never turns into a sale: ${sar(C.cod_lost)} in 12 months.`;
+el('f1p').textContent=`Cash-on-delivery orders are cancelled or refunded ${p0(C.cod_fail)} of the time, against ${p0(C.pre_fail)} for orders paid online. The risk is growing: cash on delivery went from about ${p0(codShareBefore)} of orders (Nov–May) to ${p0(codShareNow)} since August, and on orders above 800 SAR ${p0(C.band[4].cod)} fail. Store-pickup orders also fail ${p0(C.pickup_fail)} of the time, against ${p0(C.delivery_fail)} for home delivery.`;
+const bl=['Up to 100','100–200','200–400','400–800','800+'];
+(function(){const data=C.band.map((d,i)=>({b:bl[i],cod:d.cod,pre:d.pre}));const W=560,H=220,mb=24,mt=14,ml=36;const s=d3.select('#c1a').append('svg').attr('viewBox',`0 0 ${W} ${H}`);const x=d3.scaleBand().domain(data.map(d=>d.b)).range([ml,W]).padding(.25),x1=d3.scaleBand().domain(['cod','pre']).range([0,x.bandwidth()]).padding(.08);const y=d3.scaleLinear().domain([0,.5]).range([H-mb,mt]);
+s.append('g').attr('transform',`translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(p0).tickSize(-(W-ml))).call(g=>{g.select('.domain').remove();g.selectAll('line').attr('stroke','var(--line)')});
+const g=s.selectAll('g.b').data(data).join('g').attr('transform',d=>`translate(${x(d.b)},0)`);['cod','pre'].forEach(k=>g.append('rect').attr('x',x1(k)).attr('width',x1.bandwidth()).attr('y',d=>y(d[k])).attr('height',d=>y(0)-y(d[k])).attr('rx',2).attr('fill',k==='cod'?'var(--bad)':'var(--grey)').on('mousemove',(e,d)=>showTip(e,`${d.b} SAR · ${k==='cod'?'Cash on delivery':'Paid online'}: <b>${p0(d[k])}</b> fail`)).on('mouseleave',hideTip));
+g.append('text').attr('x',x1('cod')+x1.bandwidth()/2).attr('y',d=>y(d.cod)-5).attr('text-anchor','middle').style('fill','var(--bad)').style('font-weight',600).text(d=>p0(d.cod));
+s.append('g').attr('transform',`translate(0,${H-mb})`).call(d3.axisBottom(x).tickSize(0)).call(g=>g.select('.domain').remove())})();
+line('c1b',C.share,{fmt:p0});
+el('f2h').textContent=`Whites sells ${p0(pay/low-1)} more per day around payday than in the middle of the month.`;
+el('f2p').textContent=`From the 27th to the 3rd, daily sales run about ${p0(pay-1)} above a normal day; from the 16th to the 24th they sit about ${p0(1-low)} below. Fridays and Saturdays are the strongest days of the week. Campaigns that start mid-month are working against the calendar.`;
+vbars('c2a',dom.map(d=>({d:String(d.d),v:d.v*100})),{x:d=>d.d,y:d=>d.v,fmt:d=>d,base:100,color:d=>(+d.d>=27||+d.d<=3)?'var(--ok)':(+d.d>=16&&+d.d<=24)?'var(--bad)':'var(--blue)',lab:d=>`Day ${d.d}: <b>${f0(d.v)}</b> (a normal day is 100, about ${sar(D.avg_day)})`});
+vbars('c2b',D.dow.map(d=>({d:d.d,v:d.v*100})),{x:d=>d.d,y:d=>d.v,fmt:d=>d,base:100,color:d=>d.v>=105?'var(--ok)':'var(--blue)',lab:d=>`${d.d}: <b>${f0(d.v)}</b>`});
+el('f3h').textContent=`${p0(D.ht.alone)} of Dyson and Clara orders leave with nothing else in the basket.`;
+el('f3p').textContent=`Across ${f0(D.ht.orders)} Dyson and Clara orders, only about 1 in 4 added another brand. These are Whites' highest-value visitors, already at checkout. Meanwhile other customers clearly shop in pairs. The strongest pairs below are ready-made bundles.`;
+hbars('c3a',D.pairs.map(d=>({l:d.a+' + '+d.b,n:d.n})),{label:d=>d.l,val:d=>d.n,fmt:f0});
+hbars('c3b',D.ht.with,{label:d=>d.b,val:d=>d.n,fmt:f0,color:'var(--blue)'});
+el('f4h').textContent=`Dyson and Clara went from ${p0(dep0)} of Whites' sales to ${p0(depN)}, and other brands are already filling the gap.`;
+el('f4p').textContent=`The shift away from hair tools is happening. Several beauty brands grew strongly in the last three months without heavy discounting; a few big ones are slipping and need attention.`;
+line('c4a',D.dep,{fmt:p0});
+(function(){const rows=D.up.map(d=>({...d,k:'up'})).concat(D.down.map(d=>({...d,k:'dn'})));d3.select('#t4').html('<table><thead><tr><th>Brand</th><th class="r">May–Jul</th><th class="r">Aug–Oct</th><th class="r">Change</th></tr></thead><tbody>'+rows.map(d=>`<tr><td>${d.b}</td><td class="r">${sar(d.before)}</td><td class="r">${sar(d.after)}</td><td class="r ${d.k}">${d.pct>0?'+':''}${p0(d.pct)}</td></tr>`).join('')+'</tbody></table>')})();
+el('f5h').textContent=`Whites changed its prices ${D.price_changes.Whites} times in 10 days; Nahdi changed only ${D.price_changes.Nahdi}, and is still the cheapest most often.`;
+el('f5p').textContent=`Nahdi keeps steady prices and is cheapest or level on ${p0(D.cheapest_rate.Nahdi)} of the products it sells. Whites switches offers on and off, so a customer can see a different price from one day to the next, and is cheapest on ${p0(D.cheapest_rate.Whites)}. Niceone is the most active competitor; Sephora almost never moves and is rarely cheapest.`;
+hbars('c5a',Object.entries(D.price_changes).map(([k,v])=>({k,v})),{label:d=>d.k,val:d=>d.v,fmt:f0,color:d=>d.k==='Whites'?'var(--navy)':'var(--grey)'});
+hbars('c5b',Object.entries(D.cheapest_rate).map(([k,v])=>({k,v})),{label:d=>d.k,val:d=>d.v,fmt:p0,color:d=>d.k==='Whites'?'var(--navy)':'var(--grey)'});
+</script></body></html>
