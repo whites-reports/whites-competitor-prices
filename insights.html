@@ -104,8 +104,7 @@ const sum=[
 ['',p0(pay/low-1)+' more','sales per day around payday (27th–3rd) than mid-month (16th–24th)','#f2'],
 ['',p0(D.ht.alone),'of Dyson and Clara orders contain nothing else','#f3'],
 ['ok',p0(dep0)+' → '+p0(depN),'Dyson and Clara share of sales, Nov 2025 to Oct 2026','#f4'],
-['',D.price_changes.Whites+' vs '+D.price_changes.Nahdi,'price changes by Whites vs Nahdi in 10 days','#f5'],
-['bad',sar(C.cod_lost),'of cash-on-delivery orders cancelled or refunded in 12 months','#f1']];
+['',D.price_changes.Whites+' vs '+D.price_changes.Nahdi,'price changes by Whites vs Nahdi in 10 days','#f5']];
 d3.select('#sum').selectAll('a').data(sum).join('a').attr('class',d=>d[0]).attr('href',d=>d[3]).html(d=>`<div class="n">${d[1]}</div><div class="l">${d[2]}</div>`);
 el('f1h').textContent=`1 in 4 cash-on-delivery orders never turns into a sale: ${sar(C.cod_lost)} in 12 months.`;
 el('f1p').textContent=`Cash-on-delivery orders are cancelled or refunded ${p0(C.cod_fail)} of the time, against ${p0(C.pre_fail)} for orders paid online. The risk is growing: cash on delivery went from about ${p0(codShareBefore)} of orders (Nov–May) to ${p0(codShareNow)} since August. Store-pickup orders also fail ${p0(C.pickup_fail)} of the time, against ${p0(C.delivery_fail)} for home delivery.`;
