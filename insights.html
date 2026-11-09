@@ -34,16 +34,7 @@ table{border-collapse:collapse;width:100%;font-size:13px}th{text-align:left;colo
 <small>Orders: 1 Nov 2025 – 26 Oct 2026 (Whites backend export, all online orders). Competitor prices: daily checks 28 Oct – 6 Nov 2026. SAR, VAT included.</small></header>
 <section class="sum" id="sum"></section>
 
-<section class="card" id="f1"><div class="tag">1 · Cash on delivery</div>
-<h2 id="f1h"></h2><p class="lead" id="f1p"></p>
-<div class="grid"><div class="ch"><h3>Orders cancelled or refunded, by order value</h3><div class="key"><span><i class="sw" style="background:var(--bad)"></i>Cash on delivery</span><span><i class="sw" style="background:var(--grey)"></i>Paid online</span></div><div id="c1a"></div></div>
-<div class="ch"><h3>Share of orders paid cash on delivery, by month</h3><div id="c1b"></div><p class="note">October runs to 26 Oct.</p></div></div>
-<div class="do"><b>What Acquisit advises</b><ul>
-<li>Give a reason to pay online: free shipping or an extra 5% for card, Apple Pay, Tabby or Tamara payments.</li>
-<li>Confirm cash orders by WhatsApp before they ship, starting with orders above 400 SAR.</li>
-<li>For orders above 800 SAR (mostly hair tools and perfume), ask for online payment or a small deposit.</li></ul></div></section>
-
-<section class="card" id="f2"><div class="tag">2 · Payday calendar</div>
+<section class="card" id="f2"><div class="tag">1 · Payday calendar</div>
 <h2 id="f2h"></h2><p class="lead" id="f2p"></p>
 <div class="grid"><div class="ch"><h3>Average sales by day of the month (100 = a normal day)</h3><div id="c2a"></div></div>
 <div class="ch"><h3>Average sales by day of the week</h3><div id="c2b"></div></div></div>
@@ -52,7 +43,7 @@ table{border-collapse:collapse;width:100%;font-size:13px}th{text-align:left;colo
 <li>Use the quiet 16th–24th window for targeted flash deals and reminders instead of broad discounts.</li>
 <li>Weight ad budget towards Friday and Saturday.</li></ul></div></section>
 
-<section class="card" id="f3"><div class="tag">3 · Baskets and bundles</div>
+<section class="card" id="f3"><div class="tag">2 · Baskets and bundles</div>
 <h2 id="f3h"></h2><p class="lead" id="f3p"></p>
 <div class="grid"><div class="ch"><h3>Brands most often bought together (orders)</h3><div id="c3a"></div></div>
 <div class="ch"><h3>What the few Dyson and Clara buyers who add something pick (orders)</h3><div id="c3b"></div></div></div>
@@ -60,7 +51,7 @@ table{border-collapse:collapse;width:100%;font-size:13px}th{text-align:left;colo
 <li>Offer a ready-made "complete the look" add-on at checkout for every Dyson and Clara order: a heat protectant, a hair mask (K18, Kérastase) or a makeup set.</li>
 <li>Turn the strongest pairs into bundles, for example Priorin + Cystine as a hair-vitamin pack, and Beauty of Joseon + La Roche-Posay as a sun-and-repair set.</li></ul></div></section>
 
-<section class="card" id="f4"><div class="tag">4 · Life after hair tools</div>
+<section class="card" id="f4"><div class="tag">3 · Life after hair tools</div>
 <h2 id="f4h"></h2><p class="lead" id="f4p"></p>
 <div class="grid"><div class="ch"><h3>Dyson and Clara share of Whites' sales, by month</h3><div id="c4a"></div><p class="note">October runs to 26 Oct.</p></div>
 <div class="ch"><h3>Brands moving fastest (sales per 30 days, Aug–Oct vs May–Jul)</h3><div id="t4"></div></div></div>
@@ -68,13 +59,19 @@ table{border-collapse:collapse;width:100%;font-size:13px}th{text-align:left;colo
 <li>Put ad budget behind the brands already growing on their own: L'Oréal Professionnel, ISDIN, Kérastase, Medicube and QV.</li>
 <li>Investigate the fall in La Roche-Posay, Whites' biggest beauty brand. It is also where competitors are cheaper (see the price dashboard).</li></ul></div></section>
 
-<section class="card" id="f5"><div class="tag">5 · How competitors price</div>
+<section class="card" id="f5"><div class="tag">4 · How competitors price</div>
 <h2 id="f5h"></h2><p class="lead" id="f5p"></p>
 <div class="grid"><div class="ch"><h3>Price changes across 48 products, 28 Oct – 6 Nov</h3><div id="c5a"></div></div>
 <div class="ch"><h3>How often each retailer was the cheapest (or level)</h3><div id="c5b"></div><p class="note">Share of the products each retailer sells, checked daily.</p></div></div>
 <div class="do"><b>What Acquisit advises</b><ul>
 <li>Pick the 15–20 products customers compare most and hold a stable "everyday price" within 5% of Nahdi, instead of switching offers on and off.</li>
 <li>Avoid ending many offers on the same day, as on 1 Nov, when Whites went from cheapest on 13 products to 5 overnight.</li></ul></div></section>
+
+<section class="card" id="f1"><div class="tag">5 · Cash on delivery</div>
+<h2 id="f1h"></h2><p class="lead" id="f1p"></p>
+<div class="grid"><div class="ch" style="max-width:600px"><h3>Share of orders paid cash on delivery, by month</h3><div id="c1b"></div><p class="note">October runs to 26 Oct.</p></div></div>
+<div class="do"><b>What Acquisit advises</b><ul>
+<li>Give a reason to pay online: free shipping or an extra 5% for card, Apple Pay, Tabby or Tamara payments.</li></ul></div></section>
 
 <p class="foot">Cancelled or refunded = orders with status Cancelled or Refund Operation. "Normal day" = average daily sales over the period. Brand trends exclude hair tools and prescription medicines.</p>
 </div><div class="tip" id="tip"></div>
@@ -103,20 +100,15 @@ s.append('g').attr('transform',`translate(0,${H-mb})`).call(d3.axisBottom(x).tic
 const C=D.cod, codShareNow=d3.mean(C.share.slice(-3),d=>d.v), codShareBefore=d3.mean(C.share.slice(0,7),d=>d.v);
 const dom=D.dom, pay=d3.mean(dom.filter(d=>d.d>=27||d.d<=3),d=>d.v), low=d3.mean(dom.filter(d=>d.d>=16&&d.d<=24),d=>d.v);
 const dep0=D.dep[0].v, depN=D.dep[D.dep.length-1].v;
-const sum=[['bad',sar(C.cod_lost),'of cash-on-delivery orders cancelled or refunded in 12 months','#f1'],
+const sum=[
 ['',p0(pay/low-1)+' more','sales per day around payday (27th–3rd) than mid-month (16th–24th)','#f2'],
 ['',p0(D.ht.alone),'of Dyson and Clara orders contain nothing else','#f3'],
 ['ok',p0(dep0)+' → '+p0(depN),'Dyson and Clara share of sales, Nov 2025 to Oct 2026','#f4'],
-['',D.price_changes.Whites+' vs '+D.price_changes.Nahdi,'price changes by Whites vs Nahdi in 10 days','#f5']];
+['',D.price_changes.Whites+' vs '+D.price_changes.Nahdi,'price changes by Whites vs Nahdi in 10 days','#f5'],
+['bad',sar(C.cod_lost),'of cash-on-delivery orders cancelled or refunded in 12 months','#f1']];
 d3.select('#sum').selectAll('a').data(sum).join('a').attr('class',d=>d[0]).attr('href',d=>d[3]).html(d=>`<div class="n">${d[1]}</div><div class="l">${d[2]}</div>`);
 el('f1h').textContent=`1 in 4 cash-on-delivery orders never turns into a sale: ${sar(C.cod_lost)} in 12 months.`;
-el('f1p').textContent=`Cash-on-delivery orders are cancelled or refunded ${p0(C.cod_fail)} of the time, against ${p0(C.pre_fail)} for orders paid online. The risk is growing: cash on delivery went from about ${p0(codShareBefore)} of orders (Nov–May) to ${p0(codShareNow)} since August, and on orders above 800 SAR ${p0(C.band[4].cod)} fail. Store-pickup orders also fail ${p0(C.pickup_fail)} of the time, against ${p0(C.delivery_fail)} for home delivery.`;
-const bl=['Up to 100','100–200','200–400','400–800','800+'];
-(function(){const data=C.band.map((d,i)=>({b:bl[i],cod:d.cod,pre:d.pre}));const W=560,H=220,mb=24,mt=14,ml=36;const s=d3.select('#c1a').append('svg').attr('viewBox',`0 0 ${W} ${H}`);const x=d3.scaleBand().domain(data.map(d=>d.b)).range([ml,W]).padding(.25),x1=d3.scaleBand().domain(['cod','pre']).range([0,x.bandwidth()]).padding(.08);const y=d3.scaleLinear().domain([0,.5]).range([H-mb,mt]);
-s.append('g').attr('transform',`translate(${ml},0)`).call(d3.axisLeft(y).ticks(5).tickFormat(p0).tickSize(-(W-ml))).call(g=>{g.select('.domain').remove();g.selectAll('line').attr('stroke','var(--line)')});
-const g=s.selectAll('g.b').data(data).join('g').attr('transform',d=>`translate(${x(d.b)},0)`);['cod','pre'].forEach(k=>g.append('rect').attr('x',x1(k)).attr('width',x1.bandwidth()).attr('y',d=>y(d[k])).attr('height',d=>y(0)-y(d[k])).attr('rx',2).attr('fill',k==='cod'?'var(--bad)':'var(--grey)').on('mousemove',(e,d)=>showTip(e,`${d.b} SAR · ${k==='cod'?'Cash on delivery':'Paid online'}: <b>${p0(d[k])}</b> fail`)).on('mouseleave',hideTip));
-g.append('text').attr('x',x1('cod')+x1.bandwidth()/2).attr('y',d=>y(d.cod)-5).attr('text-anchor','middle').style('fill','var(--bad)').style('font-weight',600).text(d=>p0(d.cod));
-s.append('g').attr('transform',`translate(0,${H-mb})`).call(d3.axisBottom(x).tickSize(0)).call(g=>g.select('.domain').remove())})();
+el('f1p').textContent=`Cash-on-delivery orders are cancelled or refunded ${p0(C.cod_fail)} of the time, against ${p0(C.pre_fail)} for orders paid online. The risk is growing: cash on delivery went from about ${p0(codShareBefore)} of orders (Nov–May) to ${p0(codShareNow)} since August. Store-pickup orders also fail ${p0(C.pickup_fail)} of the time, against ${p0(C.delivery_fail)} for home delivery.`;
 line('c1b',C.share,{fmt:p0});
 el('f2h').textContent=`Whites sells ${p0(pay/low-1)} more per day around payday than in the middle of the month.`;
 el('f2p').textContent=`From the 27th to the 3rd, daily sales run about ${p0(pay-1)} above a normal day; from the 16th to the 24th they sit about ${p0(1-low)} below. Fridays and Saturdays are the strongest days of the week. Campaigns that start mid-month are working against the calendar.`;
