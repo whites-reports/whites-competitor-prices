@@ -98,8 +98,8 @@ const dom=D.dom, pay=d3.mean(dom.filter(d=>d.d>=27||d.d<=3),d=>d.v), low=d3.mean
 const dep0=D.dep[0].v, depN=D.dep[D.dep.length-1].v;
 const sum=[
 ['',p0(pay/low-1)+' more','sales per day around payday (27th–3rd) than mid-month (16th–24th)','#f2'],
-['',p0(D.ht.alone),'of Dyson and Clara orders contain nothing else','#f3'],
 ['ok',f0(D.pairs[0].n)+' orders','already pair '+D.pairs[0].a+' + '+D.pairs[0].b+': ready for a bundle offer','#f3'],
+['',p0(D.ht.alone),'of Dyson and Clara orders contain nothing else','#f3'],
 ['ok',p0(dep0)+' → '+p0(depN),'Dyson and Clara share of sales, Nov 2025 to Oct 2026','#f4'],
 ['',D.price_changes.Whites+' vs '+D.price_changes.Nahdi,'price changes by Whites vs Nahdi in 10 days','#f5']];
 d3.select('#sum').selectAll('a').data(sum).join('a').attr('class',d=>d[0]).attr('href',d=>d[3]).html(d=>`<div class="n">${d[1]}</div><div class="l">${d[2]}</div>`);
