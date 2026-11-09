@@ -69,7 +69,8 @@ table{border-collapse:collapse;width:100%;font-size:13px}th{text-align:left;colo
 
 <section class="card" id="f1"><div class="tag">5 · Cash on delivery</div>
 <h2 id="f1h"></h2><p class="lead" id="f1p"></p>
-<div class="grid"><div class="ch" style="max-width:600px"><h3>Share of orders paid cash on delivery, by month</h3><div id="c1b"></div><p class="note">October runs to 26 Oct.</p></div></div>
+<div class="grid"><div class="ch"><h3>Orders cancelled or refunded</h3><div id="c1c"></div><p class="note">Share of orders, Nov 2025 – Sep 2026.</p></div>
+<div class="ch"><h3>Share of orders paid cash on delivery, by month</h3><div id="c1b"></div><p class="note">October runs to 26 Oct.</p></div></div>
 <div class="do"><b>What Acquisit advises</b><ul>
 <li>Give a reason to pay online: free shipping or an extra 5% for card, Apple Pay, Tabby or Tamara payments.</li></ul></div></section>
 
@@ -110,6 +111,7 @@ d3.select('#sum').selectAll('a').data(sum).join('a').attr('class',d=>d[0]).attr(
 el('f1h').textContent=`1 in 4 cash-on-delivery orders never turns into a sale: ${sar(C.cod_lost)} in 12 months.`;
 el('f1p').textContent=`Cash-on-delivery orders are cancelled or refunded ${p0(C.cod_fail)} of the time, against ${p0(C.pre_fail)} for orders paid online. The risk is growing: cash on delivery went from about ${p0(codShareBefore)} of orders (Nov–May) to ${p0(codShareNow)} since August. Store-pickup orders also fail ${p0(C.pickup_fail)} of the time, against ${p0(C.delivery_fail)} for home delivery.`;
 line('c1b',C.share,{fmt:p0});
+hbars('c1c',[{k:'Cash on delivery',v:C.cod_fail},{k:'Paid online',v:C.pre_fail},{k:'Store pickup',v:C.pickup_fail},{k:'Home delivery',v:C.delivery_fail}],{label:d=>d.k,val:d=>d.v,fmt:p0,color:d=>(d.k==='Cash on delivery'||d.k==='Store pickup')?'var(--bad)':'var(--grey)'});
 el('f2h').textContent=`Whites sells ${p0(pay/low-1)} more per day around payday than in the middle of the month.`;
 el('f2p').textContent=`From the 27th to the 3rd, daily sales run about ${p0(pay-1)} above a normal day; from the 16th to the 24th they sit about ${p0(1-low)} below. Fridays and Saturdays are the strongest days of the week. Campaigns that start mid-month are working against the calendar.`;
 vbars('c2a',dom.map(d=>({d:String(d.d),v:d.v*100})),{x:d=>d.d,y:d=>d.v,fmt:d=>d,base:100,color:d=>(+d.d>=27||+d.d<=3)?'var(--ok)':(+d.d>=16&&+d.d<=24)?'var(--bad)':'var(--blue)',lab:d=>`Day ${d.d}: <b>${f0(d.v)}</b> (a normal day is 100, about ${sar(D.avg_day)})`});
